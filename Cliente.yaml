@@ -1,0 +1,330 @@
+openapi: 3.1.0
+info:
+  title: Clientes
+  version: '1.0'
+  description: 'El recurso cliente te permite guardar la información de tus clientes para realizarles cargos recurrentes o posteriores. La API de Culqi permite crear, eliminar y actualizar los datos de tus clientes. Adicionalmente podrás consultar los datos de un cliente en particular o listar a todos tus clientes en base a los filtros que desees.'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /v2/customers:
+    post:
+      summary: Crear Clientes
+      tags: []
+      responses:
+        '201':
+          description: La petición fue exitosa
+      operationId: post-v2-customers
+      description: Crea un cliente enviando los datos de tu cliente y más datos relacionados al mismo a través de los valores de metadata.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-type
+          description: application/json
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer << llave_privada >>
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  first_name: Richard
+                  last_name: Hendricks
+                  email: richard@piedpiper.com
+                  address: San Francisco Bay Area
+                  address_city: Palo Alto
+                  country_code: US
+                  phone_number: '6505434800'
+              properties:
+                first_name:
+                  type: string
+                  description: Nombre del cliente.
+                  minLength: 2
+                  maxLength: 50
+                  example: Richard
+                last_name:
+                  type: string
+                  description: Apellido del cliente.
+                  minLength: 2
+                  maxLength: 50
+                  example: Hendricks
+                email:
+                  type: string
+                  description: Correo electrónico del cliente
+                  minLength: 5
+                  maxLength: 50
+                  example: richard@piedpiper.com
+                address:
+                  type: string
+                  description: Dirección del cliente
+                  example: '"Av. Brasil 123"'
+                  minLength: 2
+                  maxLength: 50
+                address_city:
+                  type: string
+                  description: Ciudad del cliente
+                  example: '"Lima"'
+                  minLength: 2
+                  maxLength: 50
+                country_code:
+                  type: string
+                  minLength: 1
+                  description: Código ISO-3166-1 (Alfa 2) del país del cliente.
+                  example: '"PE"'
+                  format: ISO-3166-1
+                phone_number:
+                  type: integer
+                  description: Teléfono del cliente
+                  example: 6505434800
+                  minimum: 5
+                  maximum: 15
+                metadata:
+                  type: object
+                  description: |-
+                    Informacion adicional que se requiera enviar al crear el plan.
+
+                    Example: {"codigo_alumno" : "0001A"}
+              required:
+                - first_name
+                - last_name
+                - email
+                - address
+                - address_city
+                - country_code
+                - phone_number
+    get:
+      summary: Listar Clientes
+      operationId: get-v2-customers
+      responses:
+        '200':
+          description: La petición fue exitosa
+      description: |
+        Listar Clientes te permitirá obtener una serie de Customer existentes. De acuerdo a los filtros que uses, los clientes serán ordenados de acuerdo a su fecha de creación; siendo el primero el más reciente.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-type
+          description: application/json
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer << llave_privada >>
+        - schema:
+            type: string
+            minLength: 2
+            maxLength: 50
+            example: Richard
+          in: query
+          name: first_name
+          description: Nombre del cliente.
+        - schema:
+            type: string
+            minLength: 2
+            maxLength: 50
+            example: Hendricks
+          in: query
+          name: last_name
+          description: Apellido del cliente.
+        - schema:
+            type: string
+            example: richard@piedpiper.com
+            minLength: 5
+            maxLength: 50
+          in: query
+          name: email
+          description: Correo electrónico del cliente
+        - schema:
+            type: string
+            example: San Francisco Bay
+            minLength: 5
+            maxLength: 100
+          in: query
+          name: address
+          description: Direccion física del cliente
+        - schema:
+            type: string
+            example: San Francisco
+            minLength: 5
+            maxLength: 15
+          in: query
+          name: address_city
+          description: Ciudad del cliente
+        - schema:
+            type: string
+            example: '3383478'
+            minLength: 5
+            maxLength: 15
+          in: query
+          name: phone_number
+          description: Teléfono del cliente
+        - schema:
+            type: string
+            example: PE
+          in: query
+          name: country_code
+          description: 'Código del país, en formato ISO-3166 (Alfa 2).'
+        - schema:
+            type: integer
+            minLength: 1
+            maxLength: 50
+            example: '50'
+          in: query
+          name: limit
+          description: Cantidad exacta de clientes que se quieren listar.
+        - schema:
+            type: string
+            example: cus_live_7lYOtONQ9LxcgJUW
+            minLength: 25
+            maxLength: 25
+          in: query
+          name: before
+          description: El ID del cliente desde donde se quiere traer los resultados anteriores. No inclusivo.
+        - schema:
+            type: string
+            minLength: 25
+            maxLength: 25
+            example: cus_live_7lYOtOMM6LxcgJUW
+          in: query
+          name: after
+          description: El ID del cliente desde donde se quiere traer los resultados siguientes. No inclusivo.
+  '/v2/customers/{id}':
+    parameters:
+      - schema:
+          type: string
+          example: '"cus_live_QDO81GT6Zaseewkp"'
+          minLength: 25
+          maxLength: 25
+        name: id
+        in: path
+        required: true
+        description: ID del cliente
+    get:
+      summary: Consultar Cliente
+      tags: []
+      responses:
+        '200':
+          description: La petición fue exitosa
+      operationId: get-v2-customers-id
+      description: Devuelve los detalles de un cliente en particular. En la petición solo debes enviar el ID del cliente que Culqi te devolvió a la hora de crear uno.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-type
+          description: application/json
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer << llave_privada >>
+    patch:
+      summary: Actualizar Cliente
+      operationId: patch-v2-customers-id
+      responses:
+        '200':
+          description: La petición fue exitosa
+      description: Actualizar un cliente te permitirá modificar los valores enviados a la hora de crearlo. Cualquier parámetro que no sea proveído en la petición mantendrá el valor de la creación.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-type
+          description: application/json
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer << llave_privada >>
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  metadata:
+                    dni: '71702323'
+              properties:
+                metadata:
+                  type: object
+                  required:
+                    - dni
+                  description: |-
+                    Información adicional del plan a modificarInformación adicional del plan a modificar
+
+                    Example: {"dni" : "71701978"}
+                  properties:
+                    dni:
+                      type: string
+                      minLength: 1
+              required:
+                - metadata
+    delete:
+      summary: Eliminar Cliente
+      operationId: delete-v2-customers-id
+      responses:
+        '200':
+          description: La petición fue exitosa
+      description: Elimina de manera permanente a un cliente. Esta operación cancela cualquier cargo posterior o suscripción que esté relacionada con el Cliente.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-type
+          description: application/json
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer << llave_privada >>
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      examples:
+        - id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
