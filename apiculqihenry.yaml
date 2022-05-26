@@ -120,20 +120,21 @@ info:
       | 402    | Payment Required	          | El pago no pudo ser procesado.     |
       | 404    | Not Found          | 	El recurso solicitado en la llamada no existe.     |
       | 422    | Unprocessable Entity          | La sintaxis de la llamada es válida pero la información dentro de los parámetros es inválida.     |                                                                      
-      | 500 y 503    | Server Errors          | 	Error en los servidores Culqi y la petición no pudo ser procesada.     |  
-  ## Tipos de Errores
+      | 500 y 503    | Server Errors          | 	Error en los servidores Culqi y la petición no pudo ser procesada.     | 
+      
+    ## Tipos de Errores
 
-  Culqi devuelve los siguientes tipos de errores relacionados con los códigos de estado HTTP en sus respuestas:
+    Culqi devuelve los siguientes tipos de errores relacionados con los códigos de estado HTTP en sus respuestas:
 
-    | Type| HTTP Status Code - Descripción |
-    |--------|-------------|
-    | invalid_request_error| HTTP 400 - La petición tiene una sintaxis inválida.|
-    | authentication_error| HTTP 401 - La petición no pudo ser procesada debido a problemas con las llaves.|
-    | parameter_error| HTTP 422 - Algún parámetro de cualquier petición es inválido.|
-    | card_error| HTTP 402 - No se pudo realizar el cargo a una tarjeta.|  
-    | limit_api_error| HTTP 429 - Estás haciendo muchas peticiones rápidamente al API o superaste tu límite designado.|  
-    | resource_error| HTTP 404 - El recurso no puede ser encontrado, es inválido o tiene un estado diferente al permitido.|  
-    | api_error| HTTP 500 y 503 - Engloba cualquier otro tipo de error (Ejemplo: problema temporal con los servidores de Culqi) y debería de ocurrir muy pocas veces.|  
+      | Type| HTTP Status Code - Descripción |
+      |--------|-------------|
+      | invalid_request_error| HTTP 400 - La petición tiene una sintaxis inválida.|
+      | authentication_error| HTTP 401 - La petición no pudo ser procesada debido a problemas con las llaves.|
+      | parameter_error| HTTP 422 - Algún parámetro de cualquier petición es inválido.|
+      | card_error| HTTP 402 - No se pudo realizar el cargo a una tarjeta.|  
+      | limit_api_error| HTTP 429 - Estás haciendo muchas peticiones rápidamente al API o superaste tu límite designado.|  
+      | resource_error| HTTP 404 - El recurso no puede ser encontrado, es inválido o tiene un estado diferente al permitido.|  
+      | api_error| HTTP 500 y 503 - Engloba cualquier otro tipo de error (Ejemplo: problema temporal con los servidores de Culqi) y debería de ocurrir muy pocas veces.|  
 
 
     ## Codigos de Denegación de Bancos
