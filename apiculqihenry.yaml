@@ -121,7 +121,47 @@ info:
       | 404    | Not Found          | 	El recurso solicitado en la llamada no existe.     |
       | 422    | Unprocessable Entity          | La sintaxis de la llamada es válida pero la información dentro de los parámetros es inválida.     |                                                                      
       | 500 y 503    | Server Errors          | 	Error en los servidores Culqi y la petición no pudo ser procesada.     |  
+  ## Tipos de Errores
 
+  Culqi devuelve los siguientes tipos de errores relacionados con los códigos de estado HTTP en sus respuestas:
+
+    | Type| HTTP Status Code - Descripción |
+    |--------|-------------|
+    | invalid_request_error| HTTP 400 - La petición tiene una sintaxis inválida.|
+    | authentication_error| HTTP 401 - La petición no pudo ser procesada debido a problemas con las llaves.|
+    | parameter_error| HTTP 422 - Algún parámetro de cualquier petición es inválido.|
+    | card_error| HTTP 402 - No se pudo realizar el cargo a una tarjeta.|  
+    | limit_api_error| HTTP 429 - Estás haciendo muchas peticiones rápidamente al API o superaste tu límite designado.|  
+    | resource_error| HTTP 404 - El recurso no puede ser encontrado, es inválido o tiene un estado diferente al permitido.|  
+    | api_error| HTTP 500 y 503 - Engloba cualquier otro tipo de error (Ejemplo: problema temporal con los servidores de Culqi) y debería de ocurrir muy pocas veces.|  
+
+
+    ## Codigos de Denegación de Bancos
+
+    Culqi devuelve los siguientes tipos de denegaciones devueltas por los bancos:
+
+    | Decline Code	| Explicación |
+     |--------|-------------|
+     | expired_card	| Tarjeta vencida. La tarjeta está vencida o la fecha de vencimiento ingresada es incorrecta.| 
+     | stolen_card| Tarjeta robada. La tarjeta fue bloqueada y reportada al banco emisor como una tarjeta robada| 
+     | lost_card| Tarjeta perdida. La tarjeta fue bloqueada y reportada al banco emisor como una tarjeta perdida.| 
+     | insufficient_funds| Fondos insuficientes. La tarjeta no tiene fondos suficientes para realizar la compra.| 
+     | contact_issuer| Contactar emisor. La operación fue denegada por el banco emisor de la tarjeta y el cliente necesita contactarse con la entidad para conocer el motivo.| 
+      | invalid_cvv| CVV inválido. El código de seguridad (CVV2, CVC2, CID) de la tarjeta es inválido.| 
+     | too_many_attempts_cvv| Exceso CVV. El cliente ha intentado demasiadas veces ingresar el código de seguridad (CVV2, CVC2, CID) de la tarjeta.| 
+     | issuer_not_available| Emisor no disponible. El banco que emitió la tarjeta no responde. El cliente debe realizar el pago nuevamente.| 
+     | issuer_decline_operation| Operación denegada. La operación fue denegada por el banco emisor de la tarjeta por una razón desconocida.| 
+      |invalid_card| Tarjeta inválida. La tarjeta utilizada tiene restricciones para este tipo de compras. El cliente necesita contactarse con el banco emisor para conocer el motivo de la denegación.| 
+      |processing_error| Error de procesamiento. Ocurrió un error mientras procesabamos la compra. Contáctate con culqi.com/soporte para que te demos una solución.| 
+      |fraudulent| Operación fraudulenta. El banco emisor de la tarjeta sospecha que se trata de una compra fraudulenta.| 
+      |culqi_card| Tarjeta Culqi. Estás utilizando una tarjeta de pruebas de Culqi para realizar una compra real.| 
+      |soft_block| Tarjeta con bloqueo temporal por reintentos. El cliente debe intentar nuevamente con otra tarjeta.| 
+
+    ## Casos de Errores
+
+    A continuación te presentamos una serie de ejemplos de errores comunes a la hora de integrar la API de Culqi.
+  
+  
     # Metadata
     La metadata es una manera útil de guardar información adicional de manera estructurada en un objeto. Todos los recursos de Culqi, incluyendo [Tokens](#tag/Tokens), [Cargos](#tag/Cargos), [Planes](#tag/Planes), [Suscripciones](#tag/Suscripciones), [Devoluciones](#tag/Devoluciones), [Tarjetas](#tag/Tarjetas), [Clientes](#tag/Tarjetas) tienen un parámetro metadata que puede ser utilizado para reflejar información clave de tu negocio que quieras relacionar con las operaciones.
 
