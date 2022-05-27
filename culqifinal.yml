@@ -469,7 +469,71 @@ info:
     </table>
     </div>
 
+    Respuesta
 
+    ```json
+      {
+      "data":[
+        ...
+      ],
+      "paging":{
+        "previous": "https://api.culqi.com/v2/charges?limit=50&before=chr_test
+        _kzGrl1jlVSaY8guT",
+        "next": "https://api.culqi.com/v2/charges?limit=50&after=chr_test_ExT9
+        c1UFAH0TX2Ui",
+        "cursors": {
+        "before": "chr_test_kzGrl1jlVSaY8guT",
+        "after": "chr_test_ExT9c1UFAH0TX2Ui"
+        }
+      }
+    }
+    ```
+
+    Atributos
+
+    <div>
+    <table>
+    <tbody>
+    <tr>
+    <td title="data">data
+    <div>required</div>
+    <div>MinValue: 1</div>
+    <div>MaxValue: 100	</div>
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div>Example:   "50"</div>
+    <div>
+    <div>
+    <p>Un arreglo que contiene los elementos de la respuesta paginados por los parámetros de la petición.</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td title="paging">paging
+    <div>required</div>
+    </td>
+    <td>
+    <div>
+    <div>object</div>
+    <div>
+    <div>
+    <p>Objeto que contiene la información de los cursores.
+    </p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+
+    ## Auto-paginación
+    La mayoría de nuestras bibliotecas soportan auto-paginación. Esta funcionalidad te permite manejar grandes listados de recursos sin tener que implementar manualmente resultados paginados y realizar peticiones subsequentes.
 
     # ID de Rastreo
     Cada petición al API está asociada a un identificador de rastreo. Puedes encontrar este valor en los headers de respuesta, bajo el nombre de x-culqi-tracking-id, también lo puedes encontrar en el Panel de Culqi y en el detalle de cada petición.
