@@ -107,6 +107,124 @@ info:
 
     ## Objeto Error
 
+    Atributos:
+    <div>
+    <table>
+    <tbody>
+    <tr>
+    <td title="date">type
+    <div>required</div>
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div>Example:  "card_error"</div>
+    <div> Enum:  "invalid_request_error", "authentication_error", "parameter_error", "card_error", "limit_api_error", "resource_error"  y "api_error"</div>
+    <div>
+    <div>
+    <p>Indica el tipo de error devuelto</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td title="charge_id">charge_id
+    <div></div>
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div>Example:  "chr_test_stm3Fr4HIPC50qxH""</div>
+    <div>
+    <div>
+    <p>El ID del cargo que ha sido denegado</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td title="code">code
+    <div>Example: "card_declined"</div>
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div>
+    <div>
+    <p>Indica el tipo de error relacionado a una tarjeta</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td title="declined_code">declined_code
+    <div>Example: "insufficient_funds"</div>
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div>
+    <div>
+    <p>Indica el motivo de denegación devuelto por los bancos.</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td title="merchant_message">merchant_message
+    <div>required</div>
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div> Example: "La tarjeta no tiene fondos suficientes para realizar la compra."</div>
+    <div>
+    <div>
+    <p>Mensaje dirigido al comercio para conocer el detalle del error.</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td title="merchant_message">user_message
+    <div></div>
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div> Example: "Su tarjeta no tiene fondos suficientes. Verifica tus fondos disponibles con el banco emisor o inténta nuevamente con otra tarjeta.</div>
+    <div>
+    <div>
+    <p>Mensaje dirigido al cliente para conocer el detalle del error.</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+      <tr>
+    <td title="merchant_message">param
+    <div></div>
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div> Example: "amount"</div>
+    <div>
+    <div>
+    <p>Indica el parámetro específico relacionado al error.</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
     
 
     ## Códigos HTTP
