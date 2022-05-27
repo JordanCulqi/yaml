@@ -373,13 +373,103 @@ info:
    
 
     # Paginación
+
     Todos los recursos principales de Culqi soportan operaciones de listado, entre ellos Tokens, Cargos, Transferencias, Tarjetas, Clientes, Suscripciones, Devoluciones y Planes. Adicionalmente, todos los métodos de listado del API comparten una estructura similar tomando en cuenta estos tres parámetros: limit, after y before.
 
     Culqi utiliza una paginación en tiempo real basada en cursor a través de los parámetros after y before. Un cursor se refiere a un string de caracteres random que marca un ítem específico en una lista de datos. A menos que el ítem sea borrado, el cursor siempre estará punteando la misma parte de la lista, pero será invalidado si el ítem es removido.
 
-    En Culqi, los parámetros after y before toman el valor ID y retornan los objetos en un orden cronológico reverso. El parámetro before devuelve los objetos creados antes del objeto en cuestión. El parámetro after devuelve los objetos creados después del objeto en cuestión. Si ambos parámetros son provistos sólo before es utilizado.  
+    En Culqi, los parámetros after y before toman el valor ID y retornan los objetos en un orden cronológico reverso. El parámetro before devuelve los objetos creados antes del objeto en cuestión. El parámetro after devuelve los objetos creados después del objeto en cuestión. Si ambos parámetros son provistos sólo before es utilizado.
 
-    
+    ## Ejemplo de Paginación
+
+    En el siguiente ejemplo podrás conocer cómo realizar una petición para obtener un listado de los últimos 50 cargos.
+
+    ### Petición
+
+    Petición
+
+     ```json
+    curl -X GET -H "Authorization: Bearer sk_test_wJ7jU1ydtz9npsmc"
+    -H "Cache-Control: no-cache"
+    "https://api.culqi.com/v2/charges?limit=50&before=chr_test_kzGrl1jlVSaY8guT"
+    ```
+
+
+    Atributos
+
+    <div>
+    <table>
+    <tbody>
+    <tr>
+    <td title="limit">limit
+    <div>required</div>
+    <div>MinValue: 1</div>
+    <div>MaxValue: 100	</div>
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div>Example:   "50"</div>
+    <div>
+    <div>
+    <p>El número limite de objetos que quieres que sean retornados</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td title="charge_id">charge_id
+    <div></div>
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div>Example:  "chr_test_stm3Fr4HIPC50qxH""</div>
+    <div>
+    <div>
+    <p>El ID del cargo que ha sido denegado</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td title="after">after
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+    <div>Example: "chr_test_ExT9c1UFAH0TX2Ui"</div>
+    <div>
+    <div>
+    <p>El objeto desde donde se quiere traer la siguiente página (no inclusivo)</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    <tr>
+    <td title="before">before
+    </td>
+    <td>
+    <div>
+    <div>string</div>
+      <div>Example: "chr_test_kzGrl1jlVSaY8guT"</div>
+    <div>
+    <div>
+    <p>El objeto desde donde se quiere traer la página anterior (no inclusivo)
+    .</p>
+    </div>
+    </div>
+    </div>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+
+
 
     # ID de Rastreo
     Cada petición al API está asociada a un identificador de rastreo. Puedes encontrar este valor en los headers de respuesta, bajo el nombre de x-culqi-tracking-id, también lo puedes encontrar en el Panel de Culqi y en el detalle de cada petición.
