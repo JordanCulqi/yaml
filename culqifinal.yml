@@ -374,7 +374,7 @@ info:
 
     # Paginación
 
-    Todos los recursos principales de Culqi soportan operaciones de listado, entre ellos Tokens, Cargos, Transferencias, Tarjetas, Clientes, Suscripciones, Devoluciones y Planes. Adicionalmente, todos los métodos de listado del API comparten una estructura similar tomando en cuenta estos tres parámetros: limit, after y before.
+    Todos los recursos principales de Culqi soportan operaciones de listado, entre ellos [Tokens] (https://apidocs.culqi.com/#/tokens), [Cargos](https://apidocs.culqi.com/#/cargos), [Transferencias](https://apidocs.culqi.com/#/transferencias), [Tarjetas](https://apidocs.culqi.com/#/tarjetas), [Clientes](https://apidocs.culqi.com/#/clientes), [Suscripciones](https://apidocs.culqi.com/#/suscripciones), [Devoluciones] (https://apidocs.culqi.com/#/devoluciones) y [Planes](https://apidocs.culqi.com/#/planes). Adicionalmente, todos los métodos de listado del API comparten una estructura similar tomando en cuenta estos tres parámetros: limit, after y before.
 
     Culqi utiliza una paginación en tiempo real basada en cursor a través de los parámetros after y before. Un cursor se refiere a un string de caracteres random que marca un ítem específico en una lista de datos. A menos que el ítem sea borrado, el cursor siempre estará punteando la misma parte de la lista, pero será invalidado si el ítem es removido.
 
@@ -382,7 +382,7 @@ info:
 
     ## Ejemplo de Paginación
 
-    En el siguiente ejemplo podrás conocer cómo realizar una petición para obtener un listado de los últimos 50 cargos.
+    En el siguiente ejemplo podrás conocer cómo realizar una petición para obtener un listado de los últimos 50 [cargos](https://apidocs.culqi.com/#/cargos#list).
 
     ### Petición
 
@@ -533,7 +533,7 @@ info:
     </div>
 
     ## Auto-paginación
-    La mayoría de nuestras bibliotecas soportan auto-paginación. Esta funcionalidad te permite manejar grandes listados de recursos sin tener que implementar manualmente resultados paginados y realizar peticiones subsequentes.
+    La mayoría de nuestras [bibliotecas](https://docs.culqi.com/#/desarrollo/bibliotecas) soportan auto-paginación. Esta funcionalidad te permite manejar grandes listados de recursos sin tener que implementar manualmente resultados paginados y realizar peticiones subsequentes.
 
     # ID de Rastreo
     Cada petición al API está asociada a un identificador de rastreo. Puedes encontrar este valor en los headers de respuesta, bajo el nombre de x-culqi-tracking-id, también lo puedes encontrar en el Panel de Culqi y en el detalle de cada petición.
